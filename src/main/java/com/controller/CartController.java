@@ -35,9 +35,17 @@ public class CartController {
 		return cartService;
 	}
 
+
 	public void setCartService(CartService cartService) {
 		this.cartService = cartService;
 	}
+	@RequestMapping("/cart/getCart/{cartId}")
+
+	public @ResponseBody Cart getCartItems(@PathVariable(value="cartId")String cartId){
+		return cartService.getCartByCartId(cartId);
+	}
+
+
 	
 	@RequestMapping("cart/getCartById")
 	public String getCartId(Model model){
@@ -47,10 +55,5 @@ public class CartController {
 		model.addAttribute("cartId", customer.getCart().getCartId());
 		return "cart";
 	}
-	
-	@RequestMapping("/cart/getCart/{cartId}")
-	public @ResponseBody Cart getCartItems(@PathVariable(value="cartId")String cartId){
-		return cartService.getCartByCartId(cartId);
-	}
-	
+
 }
